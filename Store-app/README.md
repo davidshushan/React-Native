@@ -62,23 +62,23 @@ On this page we can see if our payment passed successfully OR not
 • A button that leads to further shopping on the Application
 #Screens:
 ![photo_2022-02-21_21-54-36](https://user-images.githubusercontent.com/93195038/155024493-5e7054d6-a510-48a9-a0a1-5dfc627661ba.jpg)
-###
+###1
 ![photo_2022-02-21_21-54-42](https://user-images.githubusercontent.com/93195038/155024497-6b909e19-28a7-4074-a78d-0e95fcbe8e99.jpg)
-###
+###2
 ![photo_2022-02-21_21-54-43](https://user-images.githubusercontent.com/93195038/155024500-806468ae-b356-4320-8fb4-d058ab647bb3.jpg)
-###
+###3
 ![photo_2022-02-21_21-54-45](https://user-images.githubusercontent.com/93195038/155024503-141097f8-6d6f-4291-b91b-134c36750de7.jpg)
-###
+###4
 ![photo_2022-02-21_21-55-01](https://user-images.githubusercontent.com/93195038/155024505-eaee3ac5-72b0-4ae8-b2b1-304212d6b7cf.jpg)
-###
+###5
 ![photo_2022-02-21_21-55-02](https://user-images.githubusercontent.com/93195038/155024507-d52a556a-194a-4d62-9326-8a9afb690d27.jpg)
-###
+###6
 ![photo_2022-02-21_21-55-03](https://user-images.githubusercontent.com/93195038/155024509-83286845-1e56-42ab-a4c6-bf9ebd3fde39.jpg)
-###
+###7
 ![photo_2022-02-21_21-55-04](https://user-images.githubusercontent.com/93195038/155024512-6b47f652-40ab-410a-8cd5-b16a736e19e9.jpg)
-###
+###8
 ![photo_2022-02-21_21-55-05](https://user-images.githubusercontent.com/93195038/155024514-807290c1-e83d-4ecd-b513-6e9d0a3b5c2b.jpg)
-###
+###9
 
 
 
