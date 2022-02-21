@@ -60,6 +60,7 @@ Payment Error Screen
 Order accepted Screen 
 On this page we can see if our payment passed successfully OR not
 • A button that leads to further shopping on the Application
+#Screens:
 ![photo_2022-02-21_21-54-36](https://user-images.githubusercontent.com/93195038/155024493-5e7054d6-a510-48a9-a0a1-5dfc627661ba.jpg)
 ![photo_2022-02-21_21-54-42](https://user-images.githubusercontent.com/93195038/155024497-6b909e19-28a7-4074-a78d-0e95fcbe8e99.jpg)
 ![photo_2022-02-21_21-54-43](https://user-images.githubusercontent.com/93195038/155024500-806468ae-b356-4320-8fb4-d058ab647bb3.jpg)
