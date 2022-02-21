@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, StatusBar, ScrollView, TouchableOpacity, Image ,SafeAreaView,FlatList,Dimensions, StyleSheet,ImageBackground} from 'react-native'
-import {COLOURS, Items, listTab} from '../database/Database'
+import { Items, listTab} from '../database/Database'
 import Entypo from "react-native-vector-icons/Entypo"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
-import FontAwesome from "react-native-vector-icons/FontAwesome"
-
-
-
-const image = { uri: "https://reactjs.org/logo-og.png" };
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import styles from '../../assets/Style';
+import { COLOURS } from '../../assets/Style';
 
 //num of columns on flat list (items in each row)
 const numColumns = 2;
@@ -48,34 +46,23 @@ const Home = ({navigation}) => {
   //       }/>
   // }
   return (
+    
       <TouchableOpacity 
         onPress={() => navigation.navigate("ProductInfo", {productID: item.id})}
-        style={{
-          width: '48%',
-          margin:2,
-          marginVertical: 5,    
-        }}>
+        //Home_TouchableOpacity_1
+        style={
+          styles.Home_TouchableOpacity_1
+        }>
     <ImageBackground source={item.productImage} resizeMode="cover" style={styles.image}>
-      <View key={index} style={{
-      }}>
-
-        
+      <View key={index} >
+       
         {
             item.isOff ? (
-              <View style={{
-                position: 'absolute',
-                width:'20%',
-                height: '24%',
-                backgroundColor: COLOURS.green,
-                
-                top: 0,
-                left: 0,
-                borderTopLeftRadius:10,
-                borderBottomRightRadius:10,
-                alignItems: 'center',
-                justifyContent: 'center',
-                
-              }}>
+              <View
+              //Home_View_1
+               style={
+                 styles.Home_View_1
+              }>
                 <Text style={{
                   fontSize: 12,
                   color: COLOURS.white,
@@ -86,12 +73,11 @@ const Home = ({navigation}) => {
               </View>) : null }
 
         {  item.isAvailable ? ( //is available property
-        <View style={{
-          marginBottom:30,
-          flexDirection: 'row',
-          alignItems:'center',
-          justifyContent: 'center',
-        }}>
+        <View 
+        //Home_View_2
+        style={
+          styles.Home_View_2
+        }>
           <FontAwesome name="circle" style={{
             fontSize: 14, 
             marginRight:6,
@@ -105,12 +91,9 @@ const Home = ({navigation}) => {
           }}>Available</Text>
         </View>
       ):(
-        <View style={{
-          marginBottom:30,
-          flexDirection: 'row',
-          alignItems:'center',
-          justifyContent: 'center',
-        }}>
+        <View style={
+          styles.Home_View_3
+        }>
           <FontAwesome name="circle" style={{
             fontSize: 14, 
             marginRight:6,
@@ -129,17 +112,9 @@ const Home = ({navigation}) => {
       
       <View style={{
       }}>
-      <Text style={{
-        fontSize: 14,
-        color: COLOURS.black,
-        fontWeight:'600',
-        marginBottom: 2,
-        marginTop: 90,
-        marginLeft:10,
-        flex: 1,
-      
-        paddingTop:20,
-      }}>
+      <Text style={
+        styles.Home_Text_1
+      }>
         {item.productName}
       </Text>
       
@@ -171,39 +146,28 @@ const Home = ({navigation}) => {
 
   return (
     
-    <View style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor:COLOURS.white
-    }}>
+    <View style={
+      styles.Home_View_4
+  
+    }>
       <StatusBar backgroundColor={COLOURS.white} barStyle="dark-content"/>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{
-          width: '100%',
-          flexDirection:'row',
-          justifyContent:'space-between',
-          padding: 16,
-        }}>
+        <View style={
+          styles.Home_View_5
+       
+        }>
           <TouchableOpacity>
-            <Entypo name="shopping-bag" style={{
-              fontSize: 18,
-              color: COLOURS.backgroundMedium,
-              padding: 12,
-              borderRadius: 10,
-              backgroundColor: COLOURS.backgroundLight,
-            }}/>
+            <Entypo name="shopping-bag" style={
+              styles.Home_Entypo_1
+        
+            }/>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate('MyCart')}>
-            <MaterialCommunityIcons name="cart" style={{
-              fontSize: 18,
-              color: COLOURS.backgroundMedium,
-              padding: 12,
-              borderRadius: 10,
-              borderWidth: 1,
-              borderColor: COLOURS.backgroundLight,
-
-            }}/>
+            <MaterialCommunityIcons name="cart" style={
+              styles.Home_Icon_1
+         
+            }/>
           </TouchableOpacity>
 
         </View>
@@ -211,25 +175,18 @@ const Home = ({navigation}) => {
           marginBottom: 10,
           padding: 16,
         }}>
-          <Text tyle={{
-            fontSize: 26,
-            color: COLOURS.black,
-            fontWeight: '500',
-            letterSpacing: 1,
-            marginBottom: 10
-          }}>
-              Shoes Shop &amp; Service
+    
+
+          <Text style={
+              styles.Home_Text_2
+       
+          }>
+              Shoes Shop and Service
           </Text>
-
-          <Text style={{
-            fontSize: 14,
-            color: COLOURS.black,
-            fontWeight: '400',
-            letterSpacing: 1,
-            marginBottom: 10,
-            lineHeight: 24,
-
-          }}>
+          <Text style={
+              styles.Home_Text_3
+       
+          }>
               Best Shoes Shop on the internet.
               Our Shop offers both products and services
           </Text>
@@ -247,13 +204,36 @@ const Home = ({navigation}) => {
           }
         
       </View>
+      <View style= {{ flexDirection: 'row' }}>
+      <Text style={
+        styles.Home_Text_4
+           
+              }>number of items: {Items.length}</Text>
+             
+  <TouchableOpacity style= {[ //Home_TouchableOpacity_2
+    styles.btnTab,{right: -100,borderRadius:15, borderWidth:0.8, backgroundColor: COLOURS.backgroundLight,
+    }]}
+  onPress={() =>setcategoryFilter('All') }>
+  <Text style={
+            styles.Home_Text_5
+                }>
+                  SeeAll
+              </Text>
+  </TouchableOpacity>
+     
+      </View>
+      
       <FlatList
+      
       data={datalist}
+      
+      
       // data={this.formatData(datalist,numColumns)} // use with odd number of items
       keyExtractor={(e, i ) => i.toString()}
       renderItem= {renderItem}
       numColumns={numColumns}
       />
+      
     </SafeAreaView>
    
       </ScrollView>
@@ -261,62 +241,4 @@ const Home = ({navigation}) => {
   )
 }
 
-export default Home;
-
-
-const styles = StyleSheet.create({
-
-  container: {
-      flex: 1,
-      paddingTop: 40,
-  },
-  itemStyle:{
-    justifyContent: 'center',
-    alignItems:'center',
-    flex: 1,
-    margin:1,
-    marginBottom:25,
-    height: WIDTH / numColumns,   
-},
-
-itemInvisible:{
-  backgroundColor: 'transparent',
-},
-
-  listTabStyle: {
-      flexDirection: 'row',
-      alignSelf: 'center',
-      marginBottom: 20,
-
-  },
-
-  btnTab: {
-      flexDirection: 'row',
-      borderWidth:1,
-      borderColor: COLOURS.black,
-      padding: 5.5,
-      justifyContent: 'center',
-  },
-
-
-
-  textTab: {
-      fontSize: 13,
-      color: COLOURS.black,
-  },
-  btnTabActive: {
-    backgroundColor: '#E6838D'
-},
-
-textTabActive: {
- color: '#fff'   
-},
-
-  image: {
-    flex: 1,
-    justifyContent: "center",
-    margin:2
-  },
-
-})
-
+export default Home

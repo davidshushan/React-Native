@@ -1,21 +1,28 @@
 import React, {useState, useEffect }from 'react'
 import { View, Text, StatusBar, ScrollView, TouchableOpacity, FlatList, Image, Dimensions, Animated, ToastAndroid } from 'react-native'
-import { COLOURS, Items } from '../database/Database';
+import { Items } from '../database/Database';
 import Entypo from "react-native-vector-icons/Entypo"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { Rating, } from 'react-native-ratings';
+import { COLOURS } from '../../assets/Style';
+import styles from '../../assets/Style';
 
+// const ratingCompleted = rating => {
+//   console.log("Rating is: " + rating)
+// }
+const WIDTH = Dimensions.get('window').width;
 const ProductInfo = ({route,navigation}) => {
 
   const {productID} = route.params;
 
   const [product, setProduct] = useState({});
 
-  const width = Dimensions.get('window').width;
+  
 
   const scrollX = new Animated.Value(0);
   
-  let position = Animated.divide(scrollX, width)
+  let position = Animated.divide(scrollX, WIDTH)
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -76,7 +83,7 @@ const ProductInfo = ({route,navigation}) => {
 const renderProduct = ({item, index}) => {
   return (
     <View style={{
-      width: width,
+      width: WIDTH,
       height: 240,
       alignItems: 'center',
       justifyContent: 'center',
@@ -86,13 +93,7 @@ const renderProduct = ({item, index}) => {
       <Image source={item} style={{
         width: '100%',
         height: '100%',
-        //  borderWidth:2,
-          // borderColor:'#5647',
-        //   resizeMode: 'contain',
-        resizeMode: "cover",
-       
-        
-          
+        resizeMode: "cover",     
       }}/>
     </View>
   )
@@ -110,33 +111,12 @@ const renderProduct = ({item, index}) => {
 
       <ScrollView>
         <View
-         style={{
-          width: '100%',
-          backgroundColor: COLOURS.backgroundLight,
-          borderBottomRightRadius: 20,
-          borderBottomLeftRadius: 20,
-          position: 'relative',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: 4,    
-        }}>
+         style={styles.productInfo_View_1}>
           <View
-           style={{
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingTop: 16,
-            paddingLeft: 16,
-          }}>
+           style={ styles.productInfo_View_2}>
             <TouchableOpacity onPress={() => navigation.goBack('Home')}>
               <Entypo name='chevron-left' 
-              style={{
-                fontSize: 18,
-                color: COLOURS.backgroundDark,
-                padding: 12,
-                backgroundColor: COLOURS.white,
-                borderRadius: 10,
-              }}/>
+              style={styles.productInfo_Entypo_1}/>
             </TouchableOpacity>
           </View>
           <FlatList
@@ -144,8 +124,8 @@ const renderProduct = ({item, index}) => {
           horizontal 
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
-          decelerationRate={0.8}// determines how quickly the scroll view decelerates after the user lifts their finger
-          snapToInterval={width} // swap all picture insteed of half picture an screen - need to be width!
+          decelerationRate={0.5}// determines how quickly the scroll view decelerates after the user lifts their finger
+          snapToInterval={WIDTH} // swap all picture insteed of half picture an screen - need to be width!
           bounces={false}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x:scrollX}}}],
@@ -153,14 +133,7 @@ const renderProduct = ({item, index}) => {
             
           )}/>
          
-          <View style={{
-            width: '100%',
-            flexDirection: "row",
-            alignItems:'center',
-            justifyContent:'center',
-            marginBottom: 16,
-            marginTop: 32,
-          }}>
+          <View style={styles.productInfo_View_3}>
             {product.productImageList
              ? product.productImageList.map((data, index) => {
                 let opacity = position.interpolate({
@@ -172,14 +145,8 @@ const renderProduct = ({item, index}) => {
                 return (
                   <Animated.View 
                   key={index}
-                  style={{   
-                    width: '16%',
-                    height: 2.4,
-                    backgroundColor: COLOURS.black,
-                    opacity,
-                    marginHorizontal:4,
-                    borderRadius:100,
-                  }}></Animated.View>
+                  style={
+                    [styles.productInfo_AnimatedView_1,{opacity}]}></Animated.View>
                   );
               })
 
@@ -216,70 +183,33 @@ const renderProduct = ({item, index}) => {
           justifyContent:'space-between',
         }}>
           <Text
-           style={{
-            fontSize: 24,
-            fontWeight:'600',
-            letterSpacing:0.5,
-            marginVertical: 4,
-            color: COLOURS.black,
-            maxWidth: '84%',
-
-            }}>{product.productName}</Text>
+           style={styles.productInfo_View_4}>{product.productName}</Text>
             <Ionicons name='link-outline' 
-            style={{
-              fontSize: 24,
-              color: COLOURS.blue,
-              backgroundColor: COLOURS.blue+10,
-              padding: 8,
-              borderRadius: 100,
-            }}/>
-          </View>
-          <Text style={{ 
-            fontSize: 14,
-            color: COLOURS.black,
-            fontWeight: '400',
-            letterSpacing:1,
-            opacity: 0.5,
-            lineHeight: 20,
-            maxWidth: '85%',
-            maxHeight: 44,
-            marginBottom: 6,
+            style={styles.productInfo_Ionicons_1}/>
             
-          }}>
+          </View>
+          <View>{
+            product.isAvailable == true?
+            
+          <Text 
+           style={styles.productInfo_Text_1}>sizes:  38, 39, 40, 41, 42, 43, 44, 45</Text>
+          :null}</View>
+
+          <Text style={styles.productInfo_Text_2}>
             {product.description}
           </Text>
           <View  
-           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent:'space-between',
-            // marginVertical: 14,
-            borderBottomColor: COLOURS.backgroundLight,
-            borderBottomWidth:1,
-            padding: 10,
-
-           }}>
+           style={styles.productInfo_View_5}>
              <View
-              style={{
-                flexDirection: 'row',
-                width: '80%',
-                alignItems: 'center',
-                }}>
-                <View style={{ 
-                  color: COLOURS.blue,
-                  backgroundColor: COLOURS.backgroundLight,
-                  alignItems: 'center',
-                  padding: 6,
-                  borderRadius: 100,
-                  marginRight: 10,
-
-                }}>
+              style={ styles.productInfo_View_6  }>
+                <View style={styles.productInfo_View_7  }>
                 <Entypo name="location-pin" style={{
                   fontSize: 16,
                   color: COLOURS.blue,
                 }}/>
                </View>
                <Text> Ariel University 9A,{'\n'} Ariel, Israel </Text>
+               
              </View>
              <Entypo name="chevron-right" style={{
                fontSize:22,
@@ -287,21 +217,22 @@ const renderProduct = ({item, index}) => {
 
              }}/>
           </View>
+          <Rating
+                  showRating
+                  // onFinishRating={this.ratingCompleted()}
+                  style={{ paddingVertical: 10 }}
+                />
             <View style={{
               paddingHorizontal: 16,
             }}>
              <Text 
-             style={{
-              fontSize:20,
-              fontWeight: '600',
-              maxWidth:'85%',
-              color: COLOURS.black,
-              marginBottom: 5,
-             }}>{'\uFF04'}{product.productPrice}.00</Text> 
+             style={
+               styles.productInfo_Text_3
+             }>{'\uFF04'}{product.productPrice}.00</Text> 
              <Text style={{ 
                marginBottom: 100,
              }}>
-               Tax rate 5% ~  {'\uFF04'}{product.productPrice / 20} ({'\uFF04'}
+               Shipment rate 5% ~  {'\uFF04'}{product.productPrice / 20} ({'\uFF04'}
                {product.productPrice  + product.productPrice / 20  })
              </Text>
             </View>
@@ -309,33 +240,17 @@ const renderProduct = ({item, index}) => {
       </ScrollView>
 
        <View  
-       style={{ 
-          position:'absolute',
-          bottom: 5,
-          height: '8%',
-          width:'100%',
-          justifyContent:'center',
-          alignItems:'center',
-
-      }}>
+       style={
+         styles.productInfo_View_8
+      }>
         <TouchableOpacity
         onPress={() => product.isAvailable ? addToCart(product.id) : null} 
-          style={{
-            width:'86%',
-            height:'90%',
-            backgroundColor: COLOURS.blue,
-            borderRadius: 20,
-            justifyContent:'center',
-            alignItems:'center',
-          }}>
-            <Text style={{
-              fontSize: 12,
-              fontWeight: '500',
-              letterSpacing: 1,
-              color: COLOURS.white,
-              textTransform: 'uppercase',
-
-            }}>{product.isAvailable ? 'Add to cart' : 'Not available'}</Text>
+          style={
+            styles.productInfo_TouchableOpacity_1
+          }>
+            <Text style={
+                styles.productInfo_Text_3
+            }>{product.isAvailable ? 'Add to cart' : 'Not available'}</Text>
           </TouchableOpacity>
 
         </View>
@@ -343,4 +258,4 @@ const renderProduct = ({item, index}) => {
   );
 };
 
-export default ProductInfo
+export default ProductInfo;

@@ -1,9 +1,9 @@
 import { View, Text, ScrollView , TouchableOpacity, Image, TextInput, ToastAndroid} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { COLOURS,Items, Coupons } from '../database/Database';
+import { Items, Coupons } from '../database/Database';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import { COLOURS } from '../../assets/Style';
 
 const MyCart = ({navigation}) => {
 
@@ -51,6 +51,7 @@ const getTotal = productData => {
     }
     total= total* Discount
     setTotal(total);
+    
 }
 
 //remove item from cart
@@ -68,24 +69,12 @@ const removeItemFromCart = async id => {
       getDataFromDB();
     }
   }
-}
-
-//checkOut
-const CheckOut = async() => {
-  try {
-    await AsyncStorage.removeItem('cartItems')
-  } catch (error) {
-    return error
-  }
-  ToastAndroid.show("Items will be delivered SOON", ToastAndroid.SHORT)
-
-  navigation.navigate("Home")
-
-}
+};
 
 const renderProducts = (data, index) => {
     return (
       <TouchableOpacity 
+      //TouchableOpacity_1
       key={data.key}
       onPress={() => navigation.navigate("ProductInfo", {productID: data.id})}
       style={{
@@ -190,7 +179,7 @@ const renderProducts = (data, index) => {
               <TouchableOpacity onPress={() => removeItemFromCart(data.id)}>
                 <MaterialCommunityIcons name="delete-outline" style={{
                   fontSize: 16,
-                  Color:COLOURS.backgroundDark,
+                  color:COLOURS.backgroundDark,
                   backgroundColor:COLOURS.backgroundLight,
                   padding: 8,
                   borderRadius: 100,
@@ -563,8 +552,9 @@ const checkCoupon = (text) => {
           alignItems:'center',
 
       }}>
-        <TouchableOpacity
-        onPress={() => total != 0 ? CheckOut() : null} 
+        <TouchableOpacity 
+        // onPress={() => total != 0 ? CheckOut() : null} 
+        onPress={() => navigation.navigate("Payment2")}
           style={{
             width:'86%',
             height:'90%',
